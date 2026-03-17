@@ -1,49 +1,9 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { sendContactMessage } from '../services/api';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
-
-const inputClass =
-  'w-full px-4 py-3.5 rounded-xl bg-white/4 border border-white/10 text-slate-200 placeholder-slate-600 text-sm focus:outline-none focus:border-indigo-500/50 focus:bg-white/6 transition-all duration-200 font-medium';
 
 const Contact = () => {
   const { t } = useLanguage();
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle');
-  const [errors, setErrors] = useState({});
-
-  const validate = () => {
-    const errs = {};
-    if (!form.name.trim()) errs.name = t.contact.errors.nameRequired;
-    if (!form.email.trim()) errs.email = t.contact.errors.emailRequired;
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = t.contact.errors.emailInvalid;
-    if (!form.message.trim()) errs.message = t.contact.errors.messageRequired;
-    else if (form.message.trim().length < 10) errs.message = t.contact.errors.messageTooShort;
-    return errs;
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const errs = validate();
-    if (Object.keys(errs).length) {
-      setErrors(errs);
-      return;
-    }
-    setStatus('loading');
-    try {
-      await sendContactMessage(form);
-      setStatus('success');
-      setForm({ name: '', email: '', message: '' });
-    } catch {
-      setStatus('error');
-    }
-  };
 
   const contactInfo = [
     {
@@ -53,8 +13,8 @@ const Contact = () => {
         </svg>
       ),
       label: 'Email',
-      value: 'sara@example.com',
-      href: 'mailto:sara@example.com',
+      value: 'sarabastidasburgos@gmail.com',
+      href: 'mailto:sarabastidasburgos@gmail.com',
     },
     {
       icon: (
@@ -64,7 +24,7 @@ const Contact = () => {
       ),
       label: 'GitHub',
       value: '@SaraBastidas19',
-      href: 'https://github.com/',
+      href: 'https://github.com/SaraBastidas19',
     },
     {
       icon: (
@@ -74,7 +34,17 @@ const Contact = () => {
       ),
       label: 'LinkedIn',
       value: 'Sara Bastidas',
-      href: 'https://linkedin.com/',
+      href: 'https://www.linkedin.com/in/sarabastidasburgos/',
+    },
+    {
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm8.2 2h-8a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4zm-4 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 1.8a2.7 2.7 0 1 0 2.7 2.7 2.7 2.7 0 0 0-2.7-2.7zm5.2-.9a1.05 1.05 0 1 1-1.05-1.05A1.05 1.05 0 0 1 17.2 8.4z" />
+        </svg>
+      ),
+      label: 'Instagram',
+      value: '@codigoparachicas',
+      href: 'https://www.instagram.com/codigoparachicas/',
     },
   ];
 
@@ -160,117 +130,45 @@ const Contact = () => {
             className="lg:col-span-3"
           >
             <div className="p-8 rounded-2xl bg-white/2 border border-white/8 backdrop-blur-sm">
-              <AnimatePresence mode="wait">
-                {status === 'success' ? (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-12"
-                  >
-                    <div className="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mx-auto mb-5">
-                      <svg className="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-bold text-white mb-2">{t.contact.successTitle}</h3>
-                    <p className="text-slate-500 text-sm mb-6">{t.contact.successDesc}</p>
-                    <button
-                      onClick={() => setStatus('idle')}
-                      className="px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-400 text-sm hover:border-indigo-500/30 hover:text-indigo-400 transition-all"
+              <div className="text-center py-8">
+                <div className="w-16 h-16 rounded-full bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center mx-auto mb-5">
+                  <svg className="w-8 h-8 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-3">{t.contact.readyTitle}</h3>
+                <p className="text-slate-500 text-sm max-w-md mx-auto mb-8">{t.contact.subtitle}</p>
+
+                <div className="grid sm:grid-cols-2 gap-4 text-left mb-8">
+                  {contactInfo.map((info) => (
+                    <a
+                      key={`quick-${info.label}`}
+                      href={info.href}
+                      target={info.href.startsWith('http') ? '_blank' : undefined}
+                      rel="noopener noreferrer"
+                      className="p-4 rounded-xl bg-white/3 border border-white/8 hover:border-indigo-500/30 transition-all"
                     >
-                      {t.contact.successBtn}
-                    </button>
-                  </motion.div>
-                ) : (
-                  <motion.form
-                    key="form"
-                    onSubmit={handleSubmit}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="space-y-5"
-                  >
-                    <div className="grid sm:grid-cols-2 gap-5">
-                      <div>
-                        <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
-                          {t.contact.nameLabel}
-                        </label>
-                        <input
-                          type="text"
-                          name="name"
-                          value={form.name}
-                          onChange={handleChange}
-                          placeholder={t.contact.namePlaceholder}
-                          className={`${inputClass} ${errors.name ? 'border-red-500/50 focus:border-red-500/70' : ''}`}
-                        />
-                        {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
-                      </div>
-                      <div>
-                        <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
-                          {t.contact.emailLabel}
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={form.email}
-                          onChange={handleChange}
-                          placeholder={t.contact.emailPlaceholder}
-                          className={`${inputClass} ${errors.email ? 'border-red-500/50 focus:border-red-500/70' : ''}`}
-                        />
-                        {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email}</p>}
-                      </div>
-                    </div>
+                      <div className="text-xs text-slate-600 font-mono uppercase tracking-wider">{info.label}</div>
+                      <div className="text-sm text-slate-300 font-medium mt-1">{info.value}</div>
+                    </a>
+                  ))}
+                </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
-                        {t.contact.messageLabel}
-                      </label>
-                      <textarea
-                        name="message"
-                        rows={6}
-                        value={form.message}
-                        onChange={handleChange}
-                        placeholder={t.contact.messagePlaceholder}
-                        className={`${inputClass} resize-none ${errors.message ? 'border-red-500/50 focus:border-red-500/70' : ''}`}
-                      />
-                      {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message}</p>}
-                    </div>
+                <a
+                  href="mailto:sarabastidasburgos@gmail.com"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:shadow-lg hover:shadow-indigo-500/20 transition-all"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  {t.contact.send}
+                </a>
 
-                    {status === 'error' && (
-                      <div className="p-3.5 rounded-xl bg-red-500/8 border border-red-500/20 text-red-400 text-sm">
-                        {t.contact.errorMsg}
-                      </div>
-                    )}
-
-                    <motion.button
-                      type="submit"
-                      disabled={status === 'loading'}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-200 flex items-center justify-center gap-2.5 disabled:opacity-60 disabled:cursor-not-allowed"
-                    >
-                      {status === 'loading' ? (
-                        <>
-                          <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                          </svg>
-                          {t.contact.sending}
-                        </>
-                      ) : (
-                        <>
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                          </svg>
-                          {t.contact.send}
-                        </>
-                      )}
-                    </motion.button>
-
-                    <p className="text-center text-xs text-slate-700 font-mono">{t.contact.privacy}</p>
-                  </motion.form>
-                )}
-              </AnimatePresence>
+                <p className="text-center text-xs text-slate-700 font-mono mt-6">
+                  Contacto directo por correo o redes sociales.
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>

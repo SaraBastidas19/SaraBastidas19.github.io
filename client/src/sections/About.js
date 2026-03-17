@@ -109,9 +109,9 @@ const About = () => {
             viewport={{ once: true }}
             className="lg:col-span-2 grid grid-cols-1 gap-4"
           >
-            {highlights.map((item) => (
+            {highlights.map((item, idx) => (
               <motion.div
-                key={item.title}
+                key={`about-highlight-${idx}`}
                 variants={cardVariants}
                 className={`group p-5 rounded-2xl bg-gradient-to-br ${item.color} border border-white/8 ${item.border} transition-all duration-300 cursor-default`}
               >

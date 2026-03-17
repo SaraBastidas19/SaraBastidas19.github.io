@@ -10,8 +10,8 @@ const PROJECT_STYLES = [
     gradient: 'from-indigo-500/20 to-blue-600/10',
     border: 'hover:border-indigo-500/40',
     accent: 'text-indigo-400',
-    github: 'https://github.com/',
-    demo: 'https://example.com/',
+    github: 'https://github.com/SaraBastidas19',
+    demo: 'https://sarabastidas19.github.io/Villa_Sarita/',
     icon: 'ICON_CAMP',
     status: 'Live',
   },
@@ -22,7 +22,7 @@ const PROJECT_STYLES = [
     gradient: 'from-purple-500/20 to-pink-600/10',
     border: 'hover:border-purple-500/40',
     accent: 'text-purple-400',
-    github: 'https://github.com/',
+    github: 'https://github.com/SaraBastidas19',
     demo: null,
     icon: 'ICON_GEAR',
     status: 'In Progress',
@@ -34,8 +34,8 @@ const PROJECT_STYLES = [
     gradient: 'from-emerald-500/20 to-teal-600/10',
     border: 'hover:border-emerald-500/40',
     accent: 'text-emerald-400',
-    github: 'https://github.com/',
-    demo: 'https://example.com/',
+    github: 'https://github.com/SaraBastidas19',
+    demo: null,
     icon: 'ICON_BOT',
     status: 'Live',
   },
@@ -46,7 +46,7 @@ const PROJECT_STYLES = [
     gradient: 'from-sky-500/20 to-cyan-600/10',
     border: 'hover:border-sky-500/40',
     accent: 'text-sky-400',
-    github: 'https://github.com/',
+    github: 'https://github.com/SaraBastidas19',
     demo: null,
     icon: 'ICON_BRIEF',
     status: 'Live',
@@ -203,7 +203,7 @@ const Projects = () => {
           className="text-center mt-12"
         >
           <a
-            href="https://github.com/"
+            href="https://github.com/SaraBastidas19"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/10 text-slate-500 text-sm hover:border-indigo-500/30 hover:text-indigo-400 transition-all"
